@@ -13,8 +13,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import sainsburys.countries.controller.GetRegionController;
 import sainsburys.countries.dao.ResultDao;
-import sainsburys.countries.service.GetRegionService;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CountriesApplicationTests {
@@ -23,19 +23,19 @@ class CountriesApplicationTests {
 	private int port;
 
 	@Autowired
-	private GetRegionService getRegionService;
+	private GetRegionController getRegionController;
 
 	@Autowired
 	private TestRestTemplate restTemplate;
 
 	@Test
 	void contextLoads() {
-		assertNotNull(getRegionService);
+		assertNotNull(getRegionController);
 	}
 
 	@Test
 	void testRegionServiceGetEurope() {
-		ResultDao country = getRegionService.fetchRegionData("Americas");
+		ResultDao country = getRegionController.fetchRegionData("Americas");
 		assertNotNull(country);
 		assertTrue(country.getAverageArea() > 0);
 		assertTrue(country.getAveragePopulation() > 0);
@@ -88,7 +88,7 @@ class CountriesApplicationTests {
 	void testRegionServiceNonExistingRegion() {
 
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-			getRegionService.fetchRegionData("blabla");
+			getRegionController.fetchRegionData("blabla");
 		});
 
 		String expectedMessage = "The get parameter is not valid!";

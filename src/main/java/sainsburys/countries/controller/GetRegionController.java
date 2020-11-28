@@ -1,4 +1,4 @@
-package sainsburys.countries.service;
+package sainsburys.countries.controller;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,8 +15,9 @@ import sainsburys.countries.dao.Country;
 import sainsburys.countries.dao.ResultDao;
 
 
+
 @RestController
-public class GetRegionService {
+public class GetRegionController {
 
 	private final String URL = "https://restcountries.eu/rest/v2/region/";
 	
