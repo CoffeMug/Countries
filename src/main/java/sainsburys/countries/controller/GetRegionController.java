@@ -55,7 +55,7 @@ public class GetRegionController {
 	private ResultDao calculateResult(final Country[] countries) {
 		
 		int totalPopulation = 0;
-		int totalArea = 0;
+		double totalArea = 0;
 
 		for (Country country : countries) {
 			totalPopulation += country.getPopulation();
@@ -63,7 +63,7 @@ public class GetRegionController {
 		}
 		
 		ResultDao result = new ResultDao();
-		result.setAverageArea((double) totalArea / (double) countries.length);
+		result.setAverageArea(totalArea / (double) countries.length);
 		result.setAveragePopulation(totalPopulation / countries.length);
 		return result;
 	}
