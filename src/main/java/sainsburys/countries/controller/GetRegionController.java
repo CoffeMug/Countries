@@ -14,12 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import sainsburys.countries.dao.Country;
 import sainsburys.countries.dao.ResultDao;
 
-
-
 @RestController
 public class GetRegionController {
 
-	private final String URL = "https://restcountries.eu/rest/v2/region/";
+	private static final String URL = "https://restcountries.eu/rest/v2/region/";
 	
 	private static final Set<String> validRegions = new HashSet<>();
 	
@@ -44,28 +42,29 @@ public class GetRegionController {
 
 		ResponseEntity<Country[]> countries = restTemplate.getForEntity(URL + region, Country[].class);
 
-		int totalPopulation = 0;
-		int totalArea = 0;
-
-		for (Country C : countries.getBody()) {
-			totalPopulation += C.getPopulation();
-			totalArea += C.getArea();
-		}
-
 		Country[] allCountries = countries.getBody();
 		
 		if (allCountries != null) {
-			return calculateResult(totalArea, totalPopulation, allCountries.length);
+			return calculateResult(allCountries);
 		} else {
 			return new ResultDao();
 		}
  		
 	}
 
-	private ResultDao calculateResult(int totalArea, int totalPopulation, int length) {
+	private ResultDao calculateResult(final Country[] countries) {
+		
+		int totalPopulation = 0;
+		int totalArea = 0;
+
+		for (Country country : countries) {
+			totalPopulation += country.getPopulation();
+			totalArea += country.getArea();
+		}
+		
 		ResultDao result = new ResultDao();
-		result.setAverageArea((double) totalArea / (double) length);
-		result.setAveragePopulation(totalPopulation / length);
+		result.setAverageArea((double) totalArea / (double) countries.length);
+		result.setAveragePopulation(totalPopulation / countries.length);
 		return result;
 	}
 }
