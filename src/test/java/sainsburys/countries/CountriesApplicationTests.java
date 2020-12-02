@@ -35,10 +35,11 @@ class CountriesApplicationTests {
 
 	@Test
 	void testRegionServiceGetEurope() {
-		ResultDao country = getRegionController.fetchRegionData("Americas");
+		ResponseEntity<ResultDao> country = getRegionController.fetchRegionData("Americas");
 		assertNotNull(country);
-		assertTrue(country.getAverageArea() > 0);
-		assertTrue(country.getAveragePopulation() > 0);
+		assertTrue(country.getBody().getAverageArea() > 0);
+		assertTrue(country.getBody().getAveragePopulation() > 0);
+		assertEquals(HttpStatus.OK, country.getStatusCode());
 	}
 
 	@Test

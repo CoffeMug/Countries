@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,7 @@ public class GetRegionController {
 
 	@GetMapping("/sainsbury-app")
 	@ResponseBody
-	public ResultDao fetchRegionData(@RequestParam final String region) {
+	public ResponseEntity<ResultDao> fetchRegionData(@RequestParam final String region) {
 		
 		if (!validRegions.contains(region.toLowerCase())) {
 			throw new IllegalArgumentException("The get parameter is not valid!");
@@ -45,9 +46,9 @@ public class GetRegionController {
 		Country[] allCountries = countries.getBody();
 		
 		if (allCountries != null) {
-			return calculateResult(allCountries);
+			return new ResponseEntity<>(calculateResult(allCountries), HttpStatus.OK);
 		} else {
-			return new ResultDao();
+			return new ResponseEntity<>(new ResultDao(), HttpStatus.NO_CONTENT);
 		}
  		
 	}
