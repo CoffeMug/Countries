@@ -1,4 +1,4 @@
-package sainsburys.countries;
+package countries;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -13,8 +13,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import sainsburys.countries.controller.GetRegionController;
-import sainsburys.countries.dao.ResultDao;
+import countries.controller.GetRegionController;
+import countries.dao.ResultDao;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CountriesApplicationTests {

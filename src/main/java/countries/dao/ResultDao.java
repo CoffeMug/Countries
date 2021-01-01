@@ -1,4 +1,4 @@
-package sainsburys.countries.dao;
+package countries.dao;
 
 public class ResultDao {
 

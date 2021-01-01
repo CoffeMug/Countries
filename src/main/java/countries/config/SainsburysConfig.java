@@ -1,4 +1,4 @@
-package sainsburys.countries.config;
+package countries.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package sainsburys.countries.controller;
+package countries.controller;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import sainsburys.countries.dao.Country;
-import sainsburys.countries.dao.ResultDao;
+import countries.dao.Country;
+import countries.dao.ResultDao;
 
 @RestController
 public class GetRegionController {
