@@ -46,7 +46,7 @@ class CountriesApplicationTests {
 	void statusShouldBeOKSendingValidRegion() {
 
 		ResponseEntity<ResultDao> entity = this.restTemplate
-				.getForEntity("http://localhost:" + this.port + "/sainsbury-app/asia", ResultDao.class);
+				.getForEntity("http://localhost:" + this.port + "/countries-app/asia", ResultDao.class);
 		assertEquals(HttpStatus.OK, entity.getStatusCode());
 		assertTrue(entity.getBody().getAverageArea() > 0);
 		assertTrue(entity.getBody().getAveragePopulation() > 0);
@@ -57,7 +57,7 @@ class CountriesApplicationTests {
 	void statusShouldBeInternalServerErrorSendingInValidRegion() {
 
 		ResponseEntity<ResultDao> entity = this.restTemplate
-				.getForEntity("http://localhost:" + this.port + "/sainsbury-app/asian", ResultDao.class);
+				.getForEntity("http://localhost:" + this.port + "/countries-app/asian", ResultDao.class);
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, entity.getStatusCode());
 		assertEquals(0, entity.getBody().getAverageArea());
 		assertEquals(0, entity.getBody().getAveragePopulation());
@@ -69,7 +69,7 @@ class CountriesApplicationTests {
 	void statusShouldBeNotFoundSendingInValidGetParam() {
 
 		ResponseEntity<ResultDao> entity = this.restTemplate
-				.getForEntity("http://localhost:" + this.port + "/sainsbury-app/regi", ResultDao.class);
+				.getForEntity("http://localhost:" + this.port + "/countries-app/regi", ResultDao.class);
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, entity.getStatusCode());
 		assertEquals(0, entity.getBody().getAverageArea());
 		assertEquals(0, entity.getBody().getAveragePopulation());
@@ -79,7 +79,7 @@ class CountriesApplicationTests {
 	@Test
 	void statusShouldBeBadRequestSendingNoRegion() {
 		ResponseEntity<ResultDao> entity = this.restTemplate
-				.getForEntity("http://localhost:" + this.port + "/sainsbury-app/", ResultDao.class);
+				.getForEntity("http://localhost:" + this.port + "/countries-app/", ResultDao.class);
 		assertEquals(HttpStatus.NOT_FOUND, entity.getStatusCode());
 		assertEquals(0, entity.getBody().getAverageArea());
 		assertEquals(0, entity.getBody().getAveragePopulation());

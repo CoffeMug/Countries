@@ -32,7 +32,7 @@ public class GetRegionController {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@GetMapping("/sainsbury-app/{region}")
+	@GetMapping("/countries-app/{region}")
 	public ResponseEntity<ResultDao> fetchRegionData(@PathVariable final String region) {
 		
 		if (!validRegions.contains(region.toLowerCase())) {
