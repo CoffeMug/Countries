@@ -1,14 +1,6 @@
 package sainsburys.countries.dao;
 
-import java.io.Serializable;
-
-public class ResultDao implements Serializable {
-
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class ResultDao {
 
 	private int averagePopulation;
 

@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,9 +32,8 @@ public class GetRegionController {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@GetMapping("/sainsbury-app")
-	@ResponseBody
-	public ResponseEntity<ResultDao> fetchRegionData(@RequestParam final String region) {
+	@GetMapping("/sainsbury-app/{region}")
+	public ResponseEntity<ResultDao> fetchRegionData(@PathVariable final String region) {
 		
 		if (!validRegions.contains(region.toLowerCase())) {
 			throw new IllegalArgumentException("The get parameter is not valid!");
@@ -45,7 +43,7 @@ public class GetRegionController {
 
 		Country[] allCountries = countries.getBody();
 		
-		if (allCountries != null) {
+		if (allCountries != null && allCountries.length > 0) {
 			return new ResponseEntity<>(calculateResult(allCountries), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(new ResultDao(), HttpStatus.NO_CONTENT);
