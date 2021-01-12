@@ -1,35 +1,27 @@
 package countries.dao;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Country implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Country {
 	
 	private int population;
 
 	private double area;
 	
+	public Country() {}
+	
+	public Country(int population, double area) {
+		this.population = population;
+		this.area = area;
+	}
+	
 	public int getPopulation() {
 		return population;
 	}
 	
-	public void setPopulation(int population) {
-		this.population = population;
-	}
-	
 	public double getArea() {
 		return area;
-	}
-	
-	public void setArea(double area) {
-		this.area = area;
 	}
 
 }

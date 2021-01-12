@@ -46,7 +46,7 @@ public class GetRegionController {
 		if (allCountries != null && allCountries.length > 0) {
 			return new ResponseEntity<>(calculateResult(allCountries), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(new ResultDao(), HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(new ResultDao(0, 0), HttpStatus.NO_CONTENT);
 		}
  		
 	}
@@ -61,9 +61,6 @@ public class GetRegionController {
 			totalArea += country.getArea();
 		}
 		
-		ResultDao result = new ResultDao();
-		result.setAverageArea(totalArea / (double) countries.length);
-		result.setAveragePopulation(totalPopulation / countries.length);
-		return result;
+		return new ResultDao(totalPopulation / countries.length, totalArea / (double) countries.length);
 	}
 }
